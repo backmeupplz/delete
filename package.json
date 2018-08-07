@@ -1,0 +1,9 @@
+{
+  "name": "token.delete.live",
+  "version": "1.0.0",
+  "description": "Token obtaining website for delete.live",
+  "main": "dist/app.js",
+  "repository": "https://github.com/backmeupplz/delete.git",
+  "author": "backmeupplz <backmeupplz@gmail.com>",
+  "license": "MIT"
+}
