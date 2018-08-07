@@ -6,11 +6,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Meta -->
-  <title>Reset Bot</title>
+  <title>Delete.Live</title>
   <meta name="description" content="Website that deletes social network content">
   <meta name="author" content="backmeupplz">
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
+  <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="style.css">
   <!-- Vue.js -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
@@ -18,14 +20,44 @@
 <body>
   <br>
   <div class="container">
-    <h1>Soon here will be the website that removes your data from any social network</h1>
+    <h1>Delete.Live</h1>
+    <div class="alert alert-info" role="alert">
+      <strong>Warning!</strong> This website is under construction
+    </div>
+    <p>Whatever the reason you landed here: whether you want to clean up your social network profiles to appear more professional, remove the mess you made before (we all had those posts that we are ashamed of now, 10 years after they were made) or anything else — you are at the right spot.</p>
+    <p>Even though you won't be able to delete the data from social networks' servers, this website can at least help you to delete the public data available on the Internet. Just select the social network below, select what you want to delete and hit the <code>Delete</code> button. Delete — and live.</p>
+
     <br>
+
+    <!-- Main app -->
+    <div id="main">
+      <!-- Social network select -->
+      <div class="text-center">
+        <div class="btn-group mr-2" role="group">
+          <button type="button" class="btn btn-secondary" :class="activeClass('facebook')" @click.prevent='page = "facebook"'>Facebook</button>
+          <button type="button" class="btn btn-secondary" :class="activeClass('twitter')" @click.prevent='page = "twitter"'>Twitter</button>
+          <button type="button" class="btn btn-secondary" :class="activeClass('vk')" @click.prevent='page = "vk"'>VK</button>
+        </div>
+      </div>
+      <br>
+      <!-- Social networks -->
+      <facebook v-if="page === 'facebook'"></facebook>
+      <twitter v-if="page === 'twitter'"></twitter>
+      <vk v-if="page === 'vk'"></vk>
+    </div>
+
+    <br>
+
     <div class="text-right">
       Made by <a href="https://t.me/borodutch">@borodutch</a>
     </div>
   </div>
 
-
+  <!-- Pages -->
+  <script src="facebook.js"></script>
+  <script src="twitter.js"></script>
+  <script src="vk.js"></script>
+  <!-- Main vue.js -->
   <script src="index.js"></script>
 </body>
 </html>
