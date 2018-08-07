@@ -1,6 +1,7 @@
 FROM node:10
-COPY . /
+COPY . /app
+WORKDIR /app
 RUN npm install -g yarn
 RUN yarn install
 EXPOSE 3000
-ENTRYPOINT yarn deploy
+CMD yarn deploy
