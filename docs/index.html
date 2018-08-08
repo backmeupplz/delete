@@ -1,63 +1,79 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <!-- Technical -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Meta -->
-  <title>Delete.Live</title>
-  <meta name="description" content="Website that deletes social network content">
-  <meta name="author" content="backmeupplz">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="style.css">
-  <!-- Vue.js -->
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
+  <head>
+    <!-- Technical -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta -->
+    <title>Delete.Live</title>
+    <meta name="description" content="Website to delete Facebook posts, photos, likes">
+    <meta name="author" content="backmeupplz">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
 
-<body>
-  <div class="container">
-    <h1>Delete.Live</h1>
-    <div class="alert alert-info" role="alert">
-      <strong>Warning!</strong> This website is under construction
-    </div>
-    <p>Whatever the reason you landed here: whether you want to clean up your social network profiles to appear more professional, remove the mess you made before (we all had those posts that we are ashamed of now, 10 years after they were made) or anything else — you are at the right spot.</p>
-    <p>Even though you won't be able to delete the data from social networks' servers, this website can at least help you to delete the public data available on the Internet. Just select the social network below, select what you want to delete and hit the <code>Delete</code> button. Delete — and live.</p>
-    <p>Oh, and did I mention that this website is completely <a href="https://github.com/backmeupplz/delete">open source</a> and hosted with <a href="https://pages.github.com/">GitHub Pages</a>? Now I did. Don't take my word for the privacy of this website — go check it out yourself. None of your data is getting anywhere. None of the statistics is gathered. No cookies are used. No filthy stuff. Stars on GitHub are welcome though!</p>
+  <body>
+    <div class="container">
+      <h1>Delete.Live</h1>
+      <div class="alert alert-info" role="alert">
+        <strong>Warning!</strong> This website is under construction
+      </div>
+      <p>Whatever the reason you landed here: whether you want to clean up your Facebook profile to appear more professional, remove the mess you made before (we all had those posts that we are ashamed of now, 10 years after they were made) or anything else — you are at the right spot.</p>
+      <p>Even though you won't be able to delete the data from Facebook servers, this website can at least help you to delete the public data available on the Internet. Just login to Facebook below, select what you want to delete and hit the <code>Delete</code> button. Delete — and live.</p>
+      <p>Oh, and did I mention that this website is completely <a href="https://github.com/backmeupplz/delete">open source</a> and hosted with <a href="https://pages.github.com/">GitHub Pages</a>? Don't take my word for the privacy of this website — go check it out yourself. None of your data is getting anywhere. None of the statistics is gathered. No cookies are used. No filthy stuff. Stars on GitHub are welcome though!</p>
 
-    <br>
-
-    <!-- Main app -->
-    <div id="main">
-      <!-- Social network select -->
-      <div class="text-center">
-        <div class="btn-group mr-2" role="group">
-          <button type="button" class="btn btn-secondary" :class="activeClass('facebook')" @click.prevent='page = "facebook"'>Facebook</button>
-          <button type="button" class="btn btn-secondary" :class="activeClass('twitter')" @click.prevent='page = "twitter"'>Twitter</button>
-          <button type="button" class="btn btn-secondary" :class="activeClass('vk')" @click.prevent='page = "vk"'>VK</button>
+      <!-- Main app -->
+      <div id="main">
+        <div class="text-center">
+          <p>What would you like to delete?</p>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" v-model="wallPosts">
+              Wall posts
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" v-model="photos">
+              Photos
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" v-model="videos">
+              Videos
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" v-model="likes">
+              Likes
+            </label>
+          </div>
+          <br>
+          <fb:login-button
+            :scope="permissions"
+            onlogin="checkFacebook();"
+            data-size="large"
+            data-button-type="continue_with">
+          </fb:login-button>
+          <br><br>
+          <p v-if="!deletable">Make sure you select at least one thing to delete!</p>
         </div>
       </div>
-      <br>
-      <!-- Social networks -->
-      <facebook v-if="page === 'facebook'"></facebook>
-      <twitter v-if="page === 'twitter'"></twitter>
-      <vk v-if="page === 'vk'"></vk>
+
+      <!-- Footer -->
+      <div class="text-right">
+        Made by <a href="https://t.me/borodutch">@borodutch</a>
+      </div>
     </div>
 
-    <br>
-
-<div class="text-right">
-  Made by <a href="https://t.me/borodutch">@borodutch</a>
-</div>
-  </div>
-
-  <!-- Pages -->
-  <script src="facebook.js"></script>
-  <script src="twitter.js"></script>
-  <script src="vk.js"></script>
-  <!-- Main vue.js -->
-  <script src="index.js"></script>
-</body>
+    <!-- Main vue.js -->
+    <script src="index.js"></script>
+  </body>
 </html>

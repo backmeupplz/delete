@@ -6,7 +6,7 @@ import { index } from './routes/index'
 import * as errorHandler from 'errorhandler'
 
 export class Server {
-  public app: Application;
+  public app: Application
 
   public static bootstrap() {
     return new Server()
@@ -20,10 +20,10 @@ export class Server {
 
   public config() {
     // Add static paths
-    this.app.use(express.static(path.join(__dirname, '..', 'public')))
+    this.app.use(express.static(path.join(__dirname, '..', 'docs')))
     // Configure pug
-    this.app.set('views', path.join(__dirname, '..', 'views'))
-    this.app.set('view engine', 'pug')
+    this.app.set('views', path.join(__dirname, '..', 'docs'))
+    this.app.set('view engine', 'ejs')
     // Mount json form parser
     this.app.use(json())
     // Mount query string parser
@@ -43,9 +43,9 @@ export class Server {
     const router = Router()
   
     // Home page
-    router.get('/', index.bind(index));
+    router.get('/', index)
   
     // Use router
-    this.app.use(router);
+    this.app.use(router)
   }
 }
