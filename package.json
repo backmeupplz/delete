@@ -5,5 +5,16 @@
   "main": "dist/app.js",
   "repository": "https://github.com/backmeupplz/delete.git",
   "author": "backmeupplz <backmeupplz@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "distribute": "yarn build-ts && node dist/app.js",
+    "develop": "",
+    "build-ts": "tsc --skipLibCheck",
+    "watch-ts": "tsc -w --skipLibCheck",
+    "watch-js": "nodemon dist/app.js"
+  },
+  "dependencies": {
+    "nodemon": "^1.18.3",
+    "typescript": "^3.0.1"
+  }
 }
