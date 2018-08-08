@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+"use strict"
+
+// Dependencies
+const server = require('../dist/server')
+const http = require('http')
+
+// Create http server
+const app = server.Server.bootstrap().app
+app.set('port', 8080)
+const httpServer = http.createServer(app)
+
+// Listen on provided port
+httpServer.listen(8080)
+
+// Add error handler
+httpServer.on('error', (err) => {
+  console.log(err)
+  process.exit(1)
+})
+
+// Start listening on port
+httpServer.on('listening', () => {
+  console.log('Listening on 8080')
+})
