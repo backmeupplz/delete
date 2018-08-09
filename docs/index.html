@@ -9,6 +9,8 @@
     <title>Delete.Live</title>
     <meta name="description" content="Website to delete Facebook posts, photos, likes">
     <meta name="author" content="backmeupplz">
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
     <!-- Custom styles -->
@@ -21,7 +23,7 @@
     <div class="container">
       <h1>Delete.Live</h1>
       <div class="alert alert-info" role="alert">
-        <strong>Warning!</strong> This website is under construction
+        <strong>Warning!</strong> Facebook doesn't allow apps to delete content that hasn't been created by this app. Unfortunately, the idea of simple posts deletion is impossible to implement at the moment of writing this message. Maybe at some point in future Facebook will ease their limits and this website will be up. Cheers!
       </div>
       <p>Whatever the reason you landed here: whether you want to clean up your Facebook profile to appear more professional, remove the mess you made before (we all had those posts that we are ashamed of now, 10 years after they were made) or anything else — you are at the right spot.</p>
       <p>Even though you won't be able to delete the data from Facebook servers, this website can at least help you to delete the public data available on the Internet. Just login to Facebook below, select what you want to delete and hit the <code>Delete</code> button. Delete — and live.</p>
@@ -29,14 +31,8 @@
 
       <!-- Main app -->
       <div id="main">
-        <div class="text-center">
+        <div class="text-center" v-if="!log">
           <p>What would you like to delete?</p>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" v-model="wallPosts">
-              Wall posts
-            </label>
-          </div>
           <div class="form-check">
             <label class="form-check-label">
               <input class="form-check-input" type="checkbox" v-model="photos">
@@ -57,7 +53,7 @@
           </div>
           <br>
           <fb:login-button
-            :scope="permissions"
+            scope="user_photos,user_likes,user_videos"
             onlogin="checkFacebook();"
             data-size="large"
             data-button-type="continue_with">
@@ -65,6 +61,8 @@
           <br><br>
           <p v-if="!deletable">Make sure you select at least one thing to delete!</p>
         </div>
+        <div v-for="logStr in logStrings"><code>{{logStr}}<br></code></div>
+        <br v-if="logStrings.length">
       </div>
 
       <!-- Footer -->
